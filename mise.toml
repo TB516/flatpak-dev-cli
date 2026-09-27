@@ -1,0 +1,22 @@
+[tools]
+go = "1.27.1"
+
+[tasks.fmt]
+description = "Format Go source"
+run = "gofmt -w ."
+
+[tasks.check]
+description = "Check formatting and run Go checks"
+run = '''
+unformatted=$(gofmt -l .)
+if [ -n "$unformatted" ]; then
+  printf 'Unformatted Go files:\n%s\n' "$unformatted"
+  exit 1
+fi
+go vet ./...
+go test ./...
+'''
+
+[tasks.build]
+description = "Build the CLI into bin/"
+run = "mkdir -p bin && go build -o bin/flatpak-dev ./cmd/flatpak-dev"
