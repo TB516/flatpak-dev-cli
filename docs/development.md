@@ -11,6 +11,12 @@ mise run build
 
 `check` verifies formatting and runs `go vet` and `go test`. `build` disables cgo and writes `bin/flatpak-dev`. To apply Go's source fixes, run `mise exec -- go fix ./...` before formatting.
 
+## Releases
+
+Run the **Release** workflow from GitHub Actions and enter a version such as `0.1.0`, without a `v` prefix. It installs the tools declared in `mise.toml`, runs `mise run check`, and calls `mise run build` for Linux x64 and ARM64. The workflow archives the binaries and uploads them to a GitHub release. The release tag points to the checked-out commit. Existing tags are rejected.
+
+The workflow sets `GOOS`, `GOARCH`, and `FLATPAK_DEV_VERSION` for each build. Regular builds report `dev` through `--version`; release builds report their version.
+
 ## Code layout
 
 | File | Responsibility |

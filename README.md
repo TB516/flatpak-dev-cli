@@ -2,7 +2,20 @@
 
 `flatpak-dev` runs commands and SSH editors inside a shared Flatpak SDK sandbox for each project. It uses your application's manifest and an optional `flatpak/.profile`, and prepares SSH separately from the application build.
 
-This Linux prototype needs Flatpak, Flatpak Builder, a systemd user session, and the OpenSSH client tools on the host. Install the project's SDK and extensions first. There is no packaged release yet; see [development setup](docs/development.md) to build the CLI.
+This Linux prototype needs Flatpak, Flatpak Builder, a systemd user session, and the OpenSSH client tools on the host. Install the project's SDK and extensions first.
+
+## Install
+
+From the project where you want to use it, install with mise:
+
+```sh
+mise use github:TB516/flatpak-dev-cli@0.1.0
+mise exec -- flatpak-dev --version
+```
+
+This pins the tool in the project's `mise.toml`. With mise shell activation, `flatpak-dev` is available when you enter that project. Otherwise, prefix commands with `mise exec --`.
+
+[GitHub Releases](https://github.com/TB516/flatpak-dev-cli/releases) provide Linux x64 and ARM64 binaries. See [development setup](docs/development.md) to build from source.
 
 ## Run a command
 
@@ -31,6 +44,8 @@ flatpak-dev ssh config
 ```
 
 Add the printed `Include` line near the top of `~/.ssh/config` once. Then connect to the printed host with Zed, VS Code, or another SSH editor and open the printed project path. Connecting starts the sandbox automatically.
+
+After upgrading the CLI, run `ssh config` again so the editor entry points to the newly installed binary.
 
 Generated host entries live under `$XDG_DATA_HOME/flatpak-dev/ssh`, defaulting to `~/.local/share/flatpak-dev/ssh`.
 

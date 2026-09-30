@@ -12,6 +12,8 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+var version = "dev"
+
 // main runs the CLI and reports setup or connection errors.
 func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM, syscall.SIGHUP)
@@ -31,6 +33,7 @@ func newRootCommand() *cli.Command {
 
 	return &cli.Command{
 		Name:           "flatpak-dev",
+		Version:        version,
 		Usage:          "Run commands and SSH editors in one shared Flatpak SDK sandbox",
 		Description:    "The sandbox starts automatically and stops 30 seconds after its last command or connection ends.",
 		ErrWriter:      io.Discard,

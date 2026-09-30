@@ -20,4 +20,8 @@ go test ./...;
 
 [tasks.build]
 description = "Build the CLI into bin/"
-run = "set -eu; mkdir -p bin; CGO_ENABLED=0 go build -o bin/flatpak-dev ./cmd/flatpak-dev;"
+run = '''
+set -eu;
+mkdir -p bin;
+CGO_ENABLED=0 go build -trimpath -ldflags="-X main.version=${FLATPAK_DEV_VERSION:-dev}" -o bin/flatpak-dev ./cmd/flatpak-dev;
+'''
