@@ -1,0 +1,12 @@
+# flatpak-dev project: {{.RootDir}}
+Host {{.HostName}}
+    HostName sandbox
+    User {{.Username}}
+    ProxyCommand {{.ProxyArgs | shellCommand | escapeSSHTokens}}
+    IdentityFile {{.IdentityFile | escapeSSHTokens | sshQuote}}
+    IdentitiesOnly yes
+    IdentityAgent none
+    UserKnownHostsFile {{.KnownHostsFile | escapeSSHTokens | sshQuote}}
+    HostKeyAlias {{.HostKeyAlias}}
+    StrictHostKeyChecking yes
+    PasswordAuthentication no

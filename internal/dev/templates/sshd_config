@@ -1,0 +1,16 @@
+HostKey {{.HostKey | sshQuote}}
+AuthorizedKeysFile {{.AuthorizedKeys | escapeSSHTokens | sshQuote}}
+SshdSessionPath {{.SessionHelper | sshQuote}}
+SshdAuthPath {{.AuthHelper | sshQuote}}
+PidFile none
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin no
+AllowUsers {{.Username}}
+AllowAgentForwarding no
+PrintMotd no
+LogLevel ERROR
+AcceptEnv LANG LC_* COLORTERM
+Subsystem sftp internal-sftp
+ForceCommand {{.SessionArgs | shellCommand}}
+SetEnv {{.Home | sshQuote}} {{.Profile | sshQuote}}
