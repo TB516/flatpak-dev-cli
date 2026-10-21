@@ -1,6 +1,6 @@
 module github.com/TB516/flatpak-dev-cli
 
-go 1.27.1
+go 1.27.3
 
 require (
 	al.essio.dev/pkg/shellescape v1.6.1
